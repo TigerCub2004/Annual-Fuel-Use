@@ -1,0 +1,68 @@
+/**
+ * Program that calculates the annual fuel use of a car based upon a number of variables
+ * This code is available for public use. Please give credit where it is due.
+ *
+ * @Yahvin Gali
+ * @1/11/2021
+ */
+public class AnnualFuelUse
+{
+    private int sMiles1, eMiles1, dist1;
+    private double gals1, PPG1;
+    private String carType1;
+    
+    AnnualFuelUse (int startMiles1, int endMiles1, double gallonsUsed1, double pricePerGallon1)
+    {
+        sMiles1 = startMiles1;
+        eMiles1 = endMiles1;
+        gals1 = gallonsUsed1;
+        PPG1 = pricePerGallon1;
+    }
+    
+    public int calcDistance()
+    {
+        dist1 = eMiles1 - sMiles1;
+        return dist1;
+    }
+    
+    
+    public int getSMiles()
+    {
+        return sMiles1;
+    }
+    
+    public int getEMiles()
+    {
+        return eMiles1;
+    }
+    
+    public double getGals()
+    {
+        return gals1;
+    }
+    
+    
+    //calculate miles per gallon (mpg)
+    public double calcMPG()
+    {
+        dist1 = eMiles1 - sMiles1;
+        return dist1/gals1;
+    }
+    
+    public double calcGPM()
+    {
+        dist1 = eMiles1 - sMiles1;
+        return gals1/dist1;
+    }
+    
+    public double getPPG()
+    {
+        return PPG1;
+    }
+    
+    public double cost()
+    {
+        return gals1 * PPG1;
+    }
+    
+}
