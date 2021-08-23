@@ -1,0 +1,93 @@
+/**
+ * Tester class for AnnualFuelUse; filled with data points
+ * This code is available for public use. Please give credit where it is due.
+ *
+ * @Yahvin Gali
+ * @1/11/2021
+ */
+public class AnnualFuelUseTester
+{
+    public static void main(String [] args)
+    {
+        int totalDist = 0;
+        double totalGals = 0.0;
+        double totalCost = 0.0;
+        double totalMPG = 0.0;
+        int minDist = Integer.MAX_VALUE;
+        int maxDist = Integer.MIN_VALUE;
+        double minMPG = Double.MAX_VALUE;
+        double minPrice = Double.MAX_VALUE;
+        double maxMPG = Double.MIN_VALUE;
+        double maxPrice = Double.MIN_VALUE;
+        
+        
+        
+        AnnualFuelUse[] data = {
+            new AnnualFuelUse(50800, 51200, 16.67, 3.99),
+            new AnnualFuelUse(51200, 51220, 0.87, 2.65),
+            new AnnualFuelUse(51220, 51230, 0.55, 3.99),
+            new AnnualFuelUse(51230, 51237, 0.29, 2.65),
+            new AnnualFuelUse(51237, 51245, 0.37, 2.65),
+            new AnnualFuelUse(51245, 51247, 0.08, 3.05),
+            new AnnualFuelUse(51247, 51256, 0.42, 2.85),
+            new AnnualFuelUse(51253, 51258, 0.21, 2.85),
+            new AnnualFuelUse(51258, 51266, 0.38, 3.05),
+            new AnnualFuelUse(51266, 51276, 0.5, 2.9)};
+        
+        int dist[] = new int[10];
+        for(int index = 0; index < data.length; index++)
+        {
+           int distance = data[index].calcDistance();
+           if (distance < minDist){
+               minDist = distance;
+           }
+           if (distance > maxDist){
+               maxDist = distance;
+           }
+           
+           double MPG = data[index].calcMPG();
+           if (MPG < minMPG){
+               minMPG = MPG;
+           }
+           if (MPG > maxMPG){
+               maxMPG = MPG;
+           }
+           
+           double price = data[index].getPPG();
+           if (price < minPrice){
+               minPrice = price;
+           }
+           if (price > maxPrice){
+               maxPrice = price;
+           }
+           
+           totalDist += data[index].calcDistance();
+           totalGals += data[index].getGals();
+           totalCost += data[index].cost();
+           totalMPG += data[index].calcMPG();
+        }
+        int annualDist = (totalDist/data.length)*365;
+        double annualGals = (totalGals/data.length)*365;
+        double annualMPG = (totalMPG/data.length);
+        double annualCost = (totalCost/data.length)*365;
+        
+        System.out.printf("%s %6s %12s %12s %12s %15s %12s %12s %12s\n", "Fill Up",
+        "Days", "Start Miles", "End Miles", "Distance", "Gallons Used", "MPG", "Price", "Cost");
+        for(int index = 0; index < data.length; index++)
+        {
+            System.out.printf("%4d %7d %12d %12d %12d %14.2f %16.2f %10.2f %13.2f\n", (index+1), (index+1), 
+            data[index].getSMiles(), data[index].getEMiles(), data[index].calcDistance(),
+            data[index].getGals(), data[index].calcMPG(), data[index].getPPG(),
+            data[index].cost());
+        }
+        System.out.println();
+        
+        System.out.printf("%s %42d %31.2f %10.2f\n", "Minimum:", minDist, minMPG, minPrice);
+        System.out.printf("%s %42d %31.2f %10.2f\n", "Maximum:", maxDist, maxMPG, maxPrice);
+        System.out.println();
+        System.out.printf("%s %44d %15.2f %41.2f\n", "Total:", totalDist, totalGals, totalCost);
+        System.out.printf("%s %33d %15.2f %14.2f %26.2f\n", "Annual Projection:", annualDist, annualGals,
+        annualMPG, annualCost);
+        
+    }
+}
